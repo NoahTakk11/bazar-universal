@@ -1,5 +1,5 @@
-###Get all products
-GET http://localhost:8000/api/items?q=smartphones
+###Get products by category
+GET http://localhost:8000/api/items?q=laptops
 Content-Type: application/json
 
 ###Get products by id

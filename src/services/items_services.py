@@ -57,7 +57,19 @@ class ItemsServices():
             curr.execute(f'SELECT * FROM items WHERE id = "{id}"')
             result = curr.fetchall()
 
-            return result
+            columns = [column[0] for column in curr.description]
+
+            item = []
+            for row in result:
+                field = dict(zip(columns, row))
+                item.append(field)
+
+            item[0]['images'] = [url.strip() for url in item[0]['images'].split(',')]
+            
+            connection.close()
+
+            return item
+
         except Exception as e:
             Logger.add_to_log('error', str(e))
             Logger.add_to_log('error', traceback.format_exc())
